@@ -39,6 +39,9 @@ public class RobotMap {
 		
 		public static int leftDial = 0;
 		public static int rightDial = 1;
+		
+		public static int topSwitch = 6;
+		public static int bottomSwitch = 7;
 	}
 	
 }
