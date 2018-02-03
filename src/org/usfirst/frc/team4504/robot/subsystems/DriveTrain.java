@@ -46,13 +46,13 @@ public class DriveTrain extends Subsystem {
 			right = 0.0;
 		}
 		
-		double leftRPM = left * RobotMap.rpmConversion;
-		double rightRPM = right * RobotMap.rpmConversion;
+		double leftRPM = left * RobotMap.DriveTrain.rpmConversion;
+		double rightRPM = right * RobotMap.DriveTrain.rpmConversion;
 		
-		leftBack.set(ControlMode.Follower, RobotMap.leftFront);
+		leftBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftFront);
 		leftFront.set(ControlMode.Velocity, leftRPM);
 		
-		rightBack.set(ControlMode.Follower, RobotMap.leftBack);
+		rightBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftBack);
 		rightFront.set(ControlMode.Velocity, rightRPM);
 	}
 	
@@ -69,10 +69,10 @@ public class DriveTrain extends Subsystem {
 	
 	DriveTrain()
 	{
-		leftFront = new TalonSRX(RobotMap.leftFront);
-		rightFront = new TalonSRX(RobotMap.rightFront);
-		leftBack = new TalonSRX(RobotMap.leftBack);
-		rightBack = new TalonSRX(RobotMap.rightBack);
+		leftFront = new TalonSRX(RobotMap.DriveTrain.leftFront);
+		rightFront = new TalonSRX(RobotMap.DriveTrain.rightFront);
+		leftBack = new TalonSRX(RobotMap.DriveTrain.leftBack);
+		rightBack = new TalonSRX(RobotMap.DriveTrain.rightBack);
 		
 		
 		// * configure timeout
