@@ -67,7 +67,7 @@ public class DriveTrain extends Subsystem {
 		return !violates;
 	}
 	
-	DriveTrain()
+	public DriveTrain()
 	{
 		leftFront = new TalonSRX(RobotMap.DriveTrain.leftFront);
 		rightFront = new TalonSRX(RobotMap.DriveTrain.rightFront);
