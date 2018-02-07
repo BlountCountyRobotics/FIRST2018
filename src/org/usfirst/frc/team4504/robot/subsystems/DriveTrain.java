@@ -7,7 +7,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.hal.ConstantsJNI;
 
 /**
  *
@@ -40,20 +39,43 @@ public class DriveTrain extends Subsystem {
 	
 	public void percentRPMDrive(double left, double right)
 	{
+		setEncodersRelative();
 		if(!inputsAreValid(left, right))
 		{
 			left = 0.0;
 			right = 0.0;
 		}
 		
-		double leftRPM = left * RobotMap.DriveTrain.rpmConversion;
-		double rightRPM = right * RobotMap.DriveTrain.rpmConversion;
+		double leftRPM = left * RobotMap.DriveTrain.maxRPM;
+		double rightRPM = right * RobotMap.DriveTrain.maxRPM;
+		
+		rpmDrive(leftRPM, rightRPM);
+	}
+	
+	public void rpmDrive(double leftRPM, double rightRPM)
+	{
+		setEncodersRelative();
+		leftRPM *= RobotMap.DriveTrain.rpmConversion;
+		rightRPM *= RobotMap.DriveTrain.rpmConversion;
 		
 		leftBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftFront);
 		leftFront.set(ControlMode.Velocity, leftRPM);
 		
 		rightBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftBack);
 		rightFront.set(ControlMode.Velocity, rightRPM);
+	}
+	
+	public void setMotorPosition(double position)
+	{
+		setEncodersAbsolute();
+		
+		position *= RobotMap.DriveTrain.rpmConversion;
+		
+		leftBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftFront);
+		leftFront.set(ControlMode.Position, position);
+		
+		rightBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftBack);
+		rightFront.set(ControlMode.Position, position);
 	}
 	
 	private boolean inputsAreValid(double left, double right)
@@ -73,11 +95,20 @@ public class DriveTrain extends Subsystem {
 		rightFront = new TalonSRX(RobotMap.DriveTrain.rightFront);
 		leftBack = new TalonSRX(RobotMap.DriveTrain.leftBack);
 		rightBack = new TalonSRX(RobotMap.DriveTrain.rightBack);
-		
-		
-		// * configure timeout
+	
+		setEncodersRelative();
+	}
+	
+	private void setEncodersRelative()
+	{
 		leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+	}
+	
+	private void setEncodersAbsolute()
+	{
+		leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 	}
 	
     public void initDefaultCommand() {
