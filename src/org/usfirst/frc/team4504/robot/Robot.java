@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team4504.robot;
 
+import org.usfirst.frc.team4504.robot.subsystems.Climber;
 import org.usfirst.frc.team4504.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 	public static final DriveTrain driveTrain = new DriveTrain();
+	public static final Climber climber = new Climber();
 
 	/**
 	 * This function is run when the robot is first started up and should be

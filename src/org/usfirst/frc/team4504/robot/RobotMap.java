@@ -809,4 +809,12 @@ public class RobotMap {
 		{5.29999607843137,	0.047058824	,10},
 		{5.3,	0	,10}};
 	}
+	
+	public static class Climber {
+		public static int tapeMeasure = 0;
+		public static int cimMotor = 0;
+		
+		public static double tapeMeasureSpeedDown = 0;
+		public static double speedGoingUp = 0;
+	}
 }
