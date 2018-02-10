@@ -24,8 +24,6 @@ public class RobotMap {
 		
 		// Motor info for Drivetrain
 		public static double maxRPM = 1500;
-		public static double talonUnitsPerRev = 4096.0;
-		public static double rpmConversion = talonUnitsPerRev * 600.0; // 600.0 = 100ms/min
 	} 
 	
 	public static class ButtonBoard
@@ -49,14 +47,17 @@ public class RobotMap {
 		public static int stageOne = 5;
 		public static int stageTwo = 6;
 		
-
+		public static int stageOneAcceleration = 0;
+		public static int stageOneVelocity = 0;
+		public static int stageTwoAcceleration = 0;
+		public static int stageTwoVelocity = 0;
+	}
+	
+	public static class Constants
+	{
 		public static double talonUnitsPerRev = 4096.0;
 		public static double rpmConversion = talonUnitsPerRev * 600.0; // 600.0 = 100ms/min
-		
-		public static double stageOneAcceleration = 0.0;
-		public static double stageOneVelocity = 0.0;
-		public static double stageTwoAcceleration = 0.0;
-		public static double stageTwoVelocity = 0.0;
+		public static int timeout = 0;
 	}
 	
 }

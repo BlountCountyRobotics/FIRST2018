@@ -69,8 +69,8 @@ public class DriveTrain extends Subsystem {
 	public void rpmDrive(double leftRPM, double rightRPM)
 	{
 		setEncodersRelative();
-		leftRPM *= RobotMap.DriveTrain.rpmConversion;
-		rightRPM *= RobotMap.DriveTrain.rpmConversion;
+		leftRPM *= RobotMap.Constants.rpmConversion;
+		rightRPM *= RobotMap.Constants.rpmConversion;
 		
 		leftBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftFront);
 		leftFront.set(ControlMode.Velocity, leftRPM);
@@ -83,7 +83,7 @@ public class DriveTrain extends Subsystem {
 	{
 		setEncodersAbsolute();
 		
-		position *= RobotMap.DriveTrain.rpmConversion;
+		position *= RobotMap.Constants.rpmConversion;
 		
 		leftBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftFront);
 		leftFront.set(ControlMode.Position, position);
@@ -117,14 +117,14 @@ public class DriveTrain extends Subsystem {
 	// * TODO: check if relative/absolute even makes a difference (I don't think so)
 	private void setEncodersRelative()
 	{
-		leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+		leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.Constants.timeout);
+		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.Constants.timeout);
 	}
 	
 	private void setEncodersAbsolute()
 	{
-		leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
-		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+		leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, RobotMap.Constants.timeout);
+		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, RobotMap.Constants.timeout);
 	}
 	
     public void initDefaultCommand() {
