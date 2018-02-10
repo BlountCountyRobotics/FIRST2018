@@ -19,8 +19,8 @@ public class RobotMap {
 	{
 		public static int leftFront = 1;
 		public static int rightFront = 2;
-		public static int leftBack = 1;
-		public static int rightBack = 2;
+		public static int leftBack = 3;
+		public static int rightBack = 4;
 		
 		// Motor info for Drivetrain
 		public static double maxRPM = 1500;
@@ -42,6 +42,21 @@ public class RobotMap {
 		
 		public static int topSwitch = 6;
 		public static int bottomSwitch = 7;
+	}
+	
+	public static class Elevator
+	{
+		public static int stageOne = 5;
+		public static int stageTwo = 6;
+		
+
+		public static double talonUnitsPerRev = 4096.0;
+		public static double rpmConversion = talonUnitsPerRev * 600.0; // 600.0 = 100ms/min
+		
+		public static double stageOneAcceleration = 0.0;
+		public static double stageOneVelocity = 0.0;
+		public static double stageTwoAcceleration = 0.0;
+		public static double stageTwoVelocity = 0.0;
 	}
 	
 }
