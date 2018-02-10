@@ -19,17 +19,32 @@ public class Elevator extends Subsystem {
 	
 	public void startSimulataneousLift()
 	{
+		fillProfile();
+		
 		stageOne.set(ControlMode.MotionProfile, 1); // enable motion profile
 		stageTwo.set(ControlMode.MotionProfile, 1);
 	}
 	
 	public void stopSimulataneousLift()
 	{
+		fillProfile();
+		
 		stageOne.set(ControlMode.MotionProfile, 0); // disable motion profile
 		stageTwo.set(ControlMode.MotionProfile, 0);
 	}
 	
-	public void fillProfile()
+	public void setStageOne(double output)
+	{
+		stageOne.set(ControlMode.PercentOutput, output);
+	}
+	
+	public void setStageTwo(double output)
+	{
+		stageTwo.set(ControlMode.PercentOutput, output);
+	}
+	
+	
+	private void fillProfile()
 	{
 		stageOne.fillProfile(RobotMap.MotionProfiles.stageOnePoints, 
 					RobotMap.MotionProfiles.stageOneNumPoints);
