@@ -113,6 +113,8 @@ public class DriveTrain extends Subsystem {
 		setEncodersRelative();
 	}
 	
+	
+	// * TODO: check if relative/absolute even makes a difference (I don't think so)
 	private void setEncodersRelative()
 	{
 		leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
