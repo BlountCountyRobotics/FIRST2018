@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team4504.robot;
 
+import org.usfirst.frc.team4504.robot.commands.ClimberUp;
 import org.usfirst.frc.team4504.robot.objects.ButtonBoard;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -47,6 +48,8 @@ public class OI {
 		elevatorUp = buttonBoard.getTopMiddle();
 		elevatorDown = buttonBoard.getTopRight();
 		changeShooterSpeed = buttonBoard.getTopSwitch();
+		
+		climb.whileHeld(new ClimberUp());
 	}
 	
 

@@ -60,4 +60,8 @@ public class RobotMap {
 		public static int timeout = 0;
 	}
 	
+	public static class Climber {
+		public static int tapeMeasure = 0;
+		public static int cimMotor = 0;
+	}
 }
