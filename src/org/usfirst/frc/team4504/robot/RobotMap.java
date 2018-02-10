@@ -814,8 +814,8 @@ public class RobotMap {
 		public static int tapeMeasure = 0;
 		public static int cimMotor = 0;
 		
-		public static double tapeMeasureSpeedDown = 0;
-		public static double tapeMeasureSpeedUp = 0;
+		public static double tapeMeasureDown = 0;
+		public static double tapeMeasureUp = 0;
 		public static double cimDown = 0;
 	}
 }
