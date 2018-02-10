@@ -63,5 +63,8 @@ public class RobotMap {
 	public static class Climber {
 		public static int tapeMeasure = 0;
 		public static int cimMotor = 0;
+		
+		public static double tapeMeasureSpeedDown = 0;
+		public static double speedGoingUp = 0;
 	}
 }
