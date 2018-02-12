@@ -59,6 +59,17 @@ public class RobotMap {
 		public static double rpmConversion = talonUnitsPerRev * 600.0; // 600.0 = 100ms/min
 		public static int timeout = 0;
 	}
+	
+	public static class Shooter
+	{
+		public static int left = 7;
+		public static int right = 8;
+		
+		public static double shootingRPM = 1300;
+		public static double intakeRPM = 200;
+		public static double maxRPM = 1600;
+	}
+	
 	public static class MotionProfiles
 	{
 		public static final int trajectoryPeriod = 10;

@@ -14,14 +14,12 @@ public class TalonBCR extends com.ctre.phoenix.motorcontrol.can.TalonSRX {
 
 		/* create an empty point */
 		TrajectoryPoint point = new TrajectoryPoint();
-		
+
 		/*
 		 * just in case we are interrupting another MP and there is still buffer
 		 * points in memory, clear it.
 		 */
 		this.clearMotionProfileTrajectories();
-
-		/* set the base trajectory period to zero, use the individual trajectory period below */
 		
 		/* This is fast since it's just into our TOP buffer */
 		for (int i = 0; i < totalCnt; ++i) {
@@ -30,6 +28,8 @@ public class TalonBCR extends com.ctre.phoenix.motorcontrol.can.TalonSRX {
 			/* for each point, fill our structure and pass it to API */
 			point.position = positionRot * RobotMap.Constants.talonUnitsPerRev; //Convert Revolutions to Units
 			point.velocity = velocityRPM * RobotMap.Constants.rpmConversion; //Convert RPM to Units/100ms
+			point.headingDeg = 0; /* future feature - not used in this example*/
+			point.profileSlotSelect = 0; /* which set of gains would you like to use [0,3]? */
 			point.zeroPos = false;
 			if (i == 0)
 				point.zeroPos = true; /* set this to true on the first point */
