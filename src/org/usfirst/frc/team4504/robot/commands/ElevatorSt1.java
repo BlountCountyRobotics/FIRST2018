@@ -1,13 +1,15 @@
 package org.usfirst.frc.team4504.robot.commands;
 
+import org.usfirst.frc.team4504.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ConstantElevatorSt2 extends Command {
+public class ElevatorSt1 extends Command {
 
-    public ConstantElevatorSt2() {
+    public ElevatorSt1() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }

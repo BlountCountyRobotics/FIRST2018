@@ -65,8 +65,8 @@ public class OI {
 		letGo.whileHeld(new LetGo());
 		shoot.whileHeld(new Shoot());
 		intake.whileHeld(new Intake());
-		elevatorSt1.whileHeld(new ConstantElevatorSt1());
-		elevatorSt2.whileHeld(new ConstantElevatorSt2());
+		elevatorSt1.whileHeld(new ElevatorSt1());
+		elevatorSt2.whileHeld(new ElevatorSt2());
 		autoElevator.whileHeld(new LiftAutomatically());
 	}
 	
