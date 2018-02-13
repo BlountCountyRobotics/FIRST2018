@@ -25,11 +25,19 @@ public class Grabber extends Subsystem {
     }
     
     public void grab() {
-    		grabMotor.set(ControlMode.PercentOutput, RobotMap.Grabber.grabSpeed);
+    		grabMotor.set(ControlMode.PercentOutput, RobotMap.Grabber.grabRPM * RobotMap.Constants.rpmConversion);
     		
     		// until someone opens grabber, it will continue to run the vex motors
-    		vexMotorRight.set(ControlMode.PercentOutput, RobotMap.Grabber.vexMotorRightSpeed);
-    		vexMotorLeft.set(ControlMode.PercentOutput, RobotMap.Grabber.vexMotorLeftSpeed);
+    		vexMotorRight.set(ControlMode.PercentOutput, RobotMap.Grabber.vexMotorRightRPM * RobotMap.Constants.rpmConversion);
+    		vexMotorLeft.set(ControlMode.PercentOutput, RobotMap.Grabber.vexMotorLeftRPM * RobotMap.Constants.rpmConversion);
+    }
+    
+    public void grabPercent(double percent) {
+		grabMotor.set(ControlMode.PercentOutput, percent * RobotMap.Grabber.grabRPM * RobotMap.Constants.rpmConversion);
+		
+		// until someone opens grabber, it will continue to run the vex motors
+		vexMotorRight.set(ControlMode.PercentOutput, percent * RobotMap.Grabber.vexMotorRightRPM * RobotMap.Constants.rpmConversion);
+		vexMotorLeft.set(ControlMode.PercentOutput, percent * RobotMap.Grabber.vexMotorLeftRPM * RobotMap.Constants.rpmConversion);
     }
     
     public void stop() {
@@ -37,7 +45,7 @@ public class Grabber extends Subsystem {
     }
     
     public void open() {
-    		grabMotor.set(ControlMode.PercentOutput, RobotMap.Grabber.openSpeed);
+    		grabMotor.set(ControlMode.PercentOutput, RobotMap.Grabber.openRPM * RobotMap.Constants.rpmConversion);
     		
     		// stop vex motors
     		vexMotorRight.set(ControlMode.PercentOutput, 0.0);

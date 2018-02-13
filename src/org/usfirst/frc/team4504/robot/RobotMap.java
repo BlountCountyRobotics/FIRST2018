@@ -84,10 +84,10 @@ public class RobotMap {
 		public static int vexMotorLeft = 1;
 		public static int vexMotorRight = 2;
 		
-		public static double grabSpeed = 0.0;
-		public static double openSpeed = 0.0;
-		public static double vexMotorLeftSpeed = 0.0;
-		public static double vexMotorRightSpeed = 0.0;
+		public static double grabRPM = 0.0;
+		public static double openRPM = 0.0;
+		public static double vexMotorLeftRPM = 0.0;
+		public static double vexMotorRightRPM = 0.0;
 	}
 	
 	public static class MotionProfiles
