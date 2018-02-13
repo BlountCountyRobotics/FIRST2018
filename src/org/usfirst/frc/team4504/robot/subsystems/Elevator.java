@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4504.robot.subsystems;
 
 import org.usfirst.frc.team4504.robot.RobotMap;
+import org.usfirst.frc.team4504.robot.commands.StopElevator;
 import org.usfirst.frc.team4504.robot.objects.TalonBCR;
 
 import com.ctre.phoenix.motion.MotionProfileStatus;
@@ -57,6 +58,18 @@ public class Elevator extends Subsystem {
 		stageTwo.set(ControlMode.MotionProfile, 0);
 	}
 	
+	public void stageOne(double percent)
+	{
+		double input = percent * RobotMap.Elevator.maxRPMStageOne * RobotMap.Constants.rpmConversion;
+		stageOne.set(ControlMode.Velocity, input);
+	}
+	
+	public void stageTwo(double percent)
+	{
+		double input = percent * RobotMap.Elevator.maxRPMStageTwo * RobotMap.Constants.rpmConversion;
+		stageTwo.set(ControlMode.Velocity, input);
+	}
+	
 	private void fillProfiles()
 	{
 		stageOne.fillProfile(RobotMap.MotionProfiles.stageOnePoints,
@@ -74,7 +87,7 @@ public class Elevator extends Subsystem {
 		}
 	}
 	
-	public void startProcessingPoints()
+	private void startProcessingPoints()
 	{
 		pointProcessingNotifier.startPeriodic(.005);
 	}
@@ -96,9 +109,9 @@ public class Elevator extends Subsystem {
 		stageOne = new TalonBCR(RobotMap.Elevator.stageOne);
 		stageTwo = new TalonBCR(RobotMap.Elevator.stageTwo);
 		
-		stageOne.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 
+		stageOne.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 
 				0, RobotMap.Constants.timeout);
-		stageTwo.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 
+		stageTwo.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 
 				0, RobotMap.Constants.timeout);
 
 		
@@ -109,6 +122,7 @@ public class Elevator extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new StopElevator());
     }
 }
 

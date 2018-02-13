@@ -1,15 +1,18 @@
 package org.usfirst.frc.team4504.robot.commands;
 
+import org.usfirst.frc.team4504.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ElevatorSt2 extends Command {
+public class ElevatorStageOne extends Command {
 
-    public ElevatorSt2() {
+    public ElevatorStageOne() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.elevator);
     }
 
     // Called just before this Command runs the first time
@@ -18,6 +21,12 @@ public class ElevatorSt2 extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	double input = Robot.oi.getButtonBoard().getRightDialOutput();
+    	if(Robot.oi.changeElevatorDirection.get())
+    	{
+    		input *= -1;
+    	}
+    	Robot.elevator.stageOne(input);
     }
 
     // Make this return true when this Command no longer needs to run execute()
