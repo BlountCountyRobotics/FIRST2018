@@ -16,6 +16,8 @@ public class Grabber extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	TalonBCR grabMotor = new TalonBCR(RobotMap.Grabber.motor);
+	TalonBCR vexMotorRight = new TalonBCR(RobotMap.Grabber.vexMotorRight);
+	TalonBCR vexMotorLeft = new TalonBCR(RobotMap.Grabber.vexMotorLeft);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -24,6 +26,10 @@ public class Grabber extends Subsystem {
     
     public void grab() {
     		grabMotor.set(ControlMode.PercentOutput, RobotMap.Grabber.grabSpeed);
+    		
+    		// until someone opens grabber, it will continue to run the vex motors
+    		vexMotorRight.set(ControlMode.PercentOutput, RobotMap.Grabber.vexMotorRightSpeed);
+    		vexMotorLeft.set(ControlMode.PercentOutput, RobotMap.Grabber.vexMotorLeftSpeed);
     }
     
     public void stop() {
@@ -32,6 +38,10 @@ public class Grabber extends Subsystem {
     
     public void open() {
     		grabMotor.set(ControlMode.PercentOutput, RobotMap.Grabber.openSpeed);
+    		
+    		// stop vex motors
+    		vexMotorRight.set(ControlMode.PercentOutput, 0.0);
+    		vexMotorLeft.set(ControlMode.PercentOutput, 0.0);
     }
 }
 
