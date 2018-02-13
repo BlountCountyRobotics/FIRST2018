@@ -70,6 +70,22 @@ public class RobotMap {
 		public static double maxRPM = 1600;
 	}
 	
+	public static class Climber {
+		public static int tapeMeasure = 0;
+		public static int cimMotor = 0;
+		
+		public static double tapeMeasureDown = 0;
+		public static double tapeMeasureUp = 0;
+		public static double cimDown = 0;
+	}
+	
+	public static class Grabber {
+		public static int motor = 0;
+		
+		public static double grabSpeed = 0.0;
+		public static double openSpeed = 0.0;
+	}
+	
 	public static class MotionProfiles
 	{
 		public static final int trajectoryPeriod = 10;
@@ -819,14 +835,5 @@ public class RobotMap {
 		{5.29998039215686,	0.141176471	,10},
 		{5.29999607843137,	0.047058824	,10},
 		{5.3,	0	,10}};
-	}
-	
-	public static class Climber {
-		public static int tapeMeasure = 0;
-		public static int cimMotor = 0;
-		
-		public static double tapeMeasureDown = 0;
-		public static double tapeMeasureUp = 0;
-		public static double cimDown = 0;
 	}
 }
