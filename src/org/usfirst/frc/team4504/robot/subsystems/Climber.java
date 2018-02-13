@@ -25,7 +25,7 @@ public class Climber extends Subsystem {
     }
     
     public void up() {
-    		tapeMeasure.set(ControlMode.PercentOutput, RobotMap.Climber.tapeMeasureUp);
+    		tapeMeasure.set(ControlMode.PercentOutput, RobotMap.Climber.tapeMeasureUp * RobotMap.Constants.rpmConversion);
     }
     
     public void stop() {
@@ -35,8 +35,8 @@ public class Climber extends Subsystem {
     public void down() {
     	
     		// TODO: adjust these values so that tape measure is not bent
-    		tapeMeasure.set(ControlMode.PercentOutput, RobotMap.Climber.tapeMeasureDown);
-    		cimMotor.set(ControlMode.PercentOutput, RobotMap.Climber.cimDown);
+    		tapeMeasure.set(ControlMode.PercentOutput, RobotMap.Climber.tapeMeasureDown * RobotMap.Constants.rpmConversion);
+    		cimMotor.set(ControlMode.PercentOutput, RobotMap.Climber.cimDown * RobotMap.Constants.rpmConversion);
     }
 }
 

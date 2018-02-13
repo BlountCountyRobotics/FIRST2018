@@ -7,8 +7,13 @@
 
 package org.usfirst.frc.team4504.robot;
 
+<<<<<<< HEAD
 import org.usfirst.frc.team4504.robot.commands.*;
 import org.usfirst.frc.team4504.robot.objects.BCRXboxController;
+=======
+import org.usfirst.frc.team4504.robot.commands.ClimberUp;
+import org.usfirst.frc.team4504.robot.commands.OpenGrabber;
+>>>>>>> refs/remotes/origin/master
 import org.usfirst.frc.team4504.robot.objects.ButtonBoard;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;

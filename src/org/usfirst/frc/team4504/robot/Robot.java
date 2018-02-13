@@ -9,9 +9,13 @@ package org.usfirst.frc.team4504.robot;
 
 import org.usfirst.frc.team4504.robot.subsystems.Climber;
 import org.usfirst.frc.team4504.robot.subsystems.DriveTrain;
+<<<<<<< HEAD
 import org.usfirst.frc.team4504.robot.subsystems.Elevator;
 import org.usfirst.frc.team4504.robot.subsystems.Grabber;
 import org.usfirst.frc.team4504.robot.subsystems.Shooter;
+=======
+import org.usfirst.frc.team4504.robot.subsystems.Grabber;
+>>>>>>> refs/remotes/origin/master
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -36,6 +40,7 @@ public class Robot extends TimedRobot {
 	public static final Elevator elevator = new Elevator();
 	public static final Grabber grabber = new Grabber();
 	public static final Shooter shooter = new Shooter();
+
 
 	/**
 	 * This function is run when the robot is first started up and should be
