@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class stopGrabber extends Command {
+public class StopGrabber extends Command {
 
-    public stopGrabber() {
+    public StopGrabber() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.grabber);
     }
