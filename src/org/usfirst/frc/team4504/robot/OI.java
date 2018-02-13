@@ -7,11 +7,10 @@
 
 package org.usfirst.frc.team4504.robot;
 
-import org.usfirst.frc.team4504.robot.commands.ClimberUp;
+import org.usfirst.frc.team4504.robot.commands.*;
+import org.usfirst.frc.team4504.robot.objects.BCRXboxController;
 import org.usfirst.frc.team4504.robot.objects.ButtonBoard;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
@@ -21,45 +20,51 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	
 	// Controllers
-	private XboxController controller;
+	private BCRXboxController controller;
 	private ButtonBoard buttonBoard;
 	
 	// Buttons
-	private JoystickButton controlGrabber; // button; press
-	private JoystickButton climb; // button; hold (depends on implementation; may need two buttons)
-	private JoystickButton shoot; // button; hold
-	private JoystickButton shootInverted; // button; hold
-	private JoystickButton elevatorUp; // button; hold
-	private JoystickButton elevatorDown; // button; hold
-	
-	private JoystickButton changeShooterSpeed; // switch
+	public JoystickButton grab; // button; press; on xbox
+	public JoystickButton letGo; // button; press; on xbox
+	public JoystickButton deployClimber; // button; hold
+	public JoystickButton climb; // button; hold
+	public JoystickButton shoot; // button; hold
+	public JoystickButton intake; // button; hold; on xbox
+	public JoystickButton elevatorUp; // button; hold
+	public JoystickButton elevatorDown; // button; hold
+	public JoystickButton changeShooterSpeed; // switch
 	// this makes one of the dials control the shooter speed
 	// instead of a set speed
 	
 	public OI()
 	{
-		controller = new XboxController(0);
+		controller = new BCRXboxController(0);
 		buttonBoard =  new ButtonBoard(1);
 		
-		controlGrabber = buttonBoard.getBottomLeft();
+		grab = controller.getXJoystickButton();
+		letGo = controller.getBJoystickButton();
 		climb = buttonBoard.getTopLeft();
 		shoot = buttonBoard.getBottomMiddle();
-		shootInverted = buttonBoard.getBottomRight();
+		intake = controller.getAJoystickButton();
 		elevatorUp = buttonBoard.getTopMiddle();
 		elevatorDown = buttonBoard.getTopRight();
 		changeShooterSpeed = buttonBoard.getTopSwitch();
 		
-		climb.whileHeld(new ClimberUp());
+		climb.whileHeld(new Climb());
+		deployClimber.whileHeld(new DeployClimber());
+		grab.whileHeld(new Grab());
+		letGo.whileHeld(new LetGo());
+		shoot.whileHeld(new Shoot());
 	}
 	
 
 	
-	public Joystick getButtonBoard()
+	public ButtonBoard getButtonBoard()
 	{
 		return buttonBoard;
 	}
 	
-	public XboxController getController()
+	public BCRXboxController getController()
 	{
 		return controller;
 	}
