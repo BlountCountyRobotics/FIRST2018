@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4504.robot.subsystems;
 
 import org.usfirst.frc.team4504.robot.RobotMap;
-import org.usfirst.frc.team4504.robot.commands.stopGrabber;
+import org.usfirst.frc.team4504.robot.commands.StopGrabber;
 import org.usfirst.frc.team4504.robot.objects.TalonBCR;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -21,7 +21,7 @@ public class Grabber extends Subsystem {
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new stopGrabber());
+        setDefaultCommand(new StopGrabber());
     }
     
     public double getCurrent() {
