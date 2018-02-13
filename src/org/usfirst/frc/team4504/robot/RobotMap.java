@@ -88,6 +88,7 @@ public class RobotMap {
 		public static double openRPM = 0.0;
 		public static double vexMotorLeftRPM = 0.0;
 		public static double vexMotorRightRPM = 0.0;
+		public static double currentThreshold = 0.0;
 	}
 	
 	public static class MotionProfiles

@@ -18,18 +18,27 @@ public class Grabber extends Subsystem {
 	TalonBCR grabMotor = new TalonBCR(RobotMap.Grabber.motor);
 	TalonBCR vexMotorRight = new TalonBCR(RobotMap.Grabber.vexMotorRight);
 	TalonBCR vexMotorLeft = new TalonBCR(RobotMap.Grabber.vexMotorLeft);
-
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new stopGrabber());
     }
     
+    public double getCurrent() {
+    		return grabMotor.getOutputCurrent();
+    }
+    
     public void grab() {
-    		grabMotor.set(ControlMode.PercentOutput, RobotMap.Grabber.grabRPM * RobotMap.Constants.rpmConversion);
-    		
-    		// until someone opens grabber, it will continue to run the vex motors
-    		vexMotorRight.set(ControlMode.PercentOutput, RobotMap.Grabber.vexMotorRightRPM * RobotMap.Constants.rpmConversion);
-    		vexMotorLeft.set(ControlMode.PercentOutput, RobotMap.Grabber.vexMotorLeftRPM * RobotMap.Constants.rpmConversion);
+    		double outputCurrent = grabMotor.getOutputCurrent(); 
+    	
+    		// TODO: make PID version of this
+    		if (outputCurrent <= RobotMap.Grabber.currentThreshold) {
+	    		grabMotor.set(ControlMode.PercentOutput, RobotMap.Grabber.grabRPM * RobotMap.Constants.rpmConversion);
+	    		
+	    		// until someone opens grabber, it will continue to run the vex motors
+	    		vexMotorRight.set(ControlMode.PercentOutput, RobotMap.Grabber.vexMotorRightRPM * RobotMap.Constants.rpmConversion);
+	    		vexMotorLeft.set(ControlMode.PercentOutput, RobotMap.Grabber.vexMotorLeftRPM * RobotMap.Constants.rpmConversion);
+    		}
     }
     
     public void grabPercent(double percent) {
