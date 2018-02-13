@@ -1,10 +1,8 @@
 package org.usfirst.frc.team4504.robot.commands;
 
-import org.omg.PortableInterceptor.ObjectIdHelper;
 import org.usfirst.frc.team4504.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  *
@@ -23,9 +21,9 @@ public class Shoot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.m_oi.getButtonBoard().getTopSwitch().get())
+    	if(Robot.oi.changeShooterSpeed.get())
     	{
-    		double input = Robot.m_oi.getButtonBoard().getLeftDialOutput();
+    		double input = Robot.oi.getButtonBoard().getLeftDialOutput();
     		input -= .5;
     		input *= 2; // go from (0.0, 1.0) to (-1.0, 1.0)
     		Robot.shooter.shoot(input);

@@ -1,13 +1,13 @@
 package org.usfirst.frc.team4504.robot.subsystems;
 
 import org.usfirst.frc.team4504.robot.RobotMap;
+import org.usfirst.frc.team4504.robot.objects.BCRXboxController;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -23,13 +23,13 @@ public class DriveTrain extends Subsystem {
 	TalonSRX rightFront;
 	TalonSRX rightBack;
 	
-	public void xboxToVoltage(XboxController controller)
+	public void xboxToVoltage(BCRXboxController controller)
 	{
 		percentVoltageDrive(controller.getY(Hand.kLeft), 
 				controller.getY(Hand.kRight));
 	}
 	
-	public void xboxToRPM(XboxController controller)
+	public void xboxToRPM(BCRXboxController controller)
 	{
 		percentVoltageDrive(controller.getY(Hand.kLeft), 
 				controller.getY(Hand.kRight));

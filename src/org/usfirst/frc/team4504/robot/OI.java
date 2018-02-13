@@ -7,13 +7,8 @@
 
 package org.usfirst.frc.team4504.robot;
 
-<<<<<<< HEAD
 import org.usfirst.frc.team4504.robot.commands.*;
 import org.usfirst.frc.team4504.robot.objects.BCRXboxController;
-=======
-import org.usfirst.frc.team4504.robot.commands.ClimberUp;
-import org.usfirst.frc.team4504.robot.commands.OpenGrabber;
->>>>>>> refs/remotes/origin/master
 import org.usfirst.frc.team4504.robot.objects.ButtonBoard;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -35,8 +30,13 @@ public class OI {
 	public JoystickButton climb; // button; hold
 	public JoystickButton shoot; // button; hold
 	public JoystickButton intake; // button; hold; on xbox
-	public JoystickButton elevatorUp; // button; hold
-	public JoystickButton elevatorDown; // button; hold
+	public JoystickButton elevatorSt1; // button; hold
+	public JoystickButton elevatorSt2; // button; hold
+	public JoystickButton autoElevator;
+	
+	public JoystickButton changeElevatorDirection; // switch
+	// this changes the direction of the elevator
+	// from U/D when the buttons for it are pressed
 	public JoystickButton changeShooterSpeed; // switch
 	// this makes one of the dials control the shooter speed
 	// instead of a set speed
@@ -49,17 +49,25 @@ public class OI {
 		grab = controller.getXJoystickButton();
 		letGo = controller.getBJoystickButton();
 		climb = buttonBoard.getTopLeft();
+		deployClimber = buttonBoard.getBottomLeft();
 		shoot = buttonBoard.getBottomMiddle();
 		intake = controller.getAJoystickButton();
-		elevatorUp = buttonBoard.getTopMiddle();
-		elevatorDown = buttonBoard.getTopRight();
+		elevatorSt1 = buttonBoard.getTopMiddle();
+		elevatorSt2 = buttonBoard.getTopRight();
+		autoElevator = buttonBoard.getTopRight();
+		
 		changeShooterSpeed = buttonBoard.getTopSwitch();
+		changeElevatorDirection = buttonBoard.getBottomSwitch();
 		
 		climb.whileHeld(new Climb());
 		deployClimber.whileHeld(new DeployClimber());
 		grab.whileHeld(new Grab());
 		letGo.whileHeld(new LetGo());
 		shoot.whileHeld(new Shoot());
+		intake.whileHeld(new Intake());
+		elevatorSt1.whileHeld(new ConstantElevatorSt1());
+		elevatorSt2.whileHeld(new ConstantElevatorSt2());
+		autoElevator.whileHeld(new LiftAutomatically());
 	}
 	
 

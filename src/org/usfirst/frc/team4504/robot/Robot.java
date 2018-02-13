@@ -9,13 +9,10 @@ package org.usfirst.frc.team4504.robot;
 
 import org.usfirst.frc.team4504.robot.subsystems.Climber;
 import org.usfirst.frc.team4504.robot.subsystems.DriveTrain;
-<<<<<<< HEAD
 import org.usfirst.frc.team4504.robot.subsystems.Elevator;
 import org.usfirst.frc.team4504.robot.subsystems.Grabber;
 import org.usfirst.frc.team4504.robot.subsystems.Shooter;
-=======
-import org.usfirst.frc.team4504.robot.subsystems.Grabber;
->>>>>>> refs/remotes/origin/master
+
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -31,10 +28,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static OI m_oi;
+	public static OI oi;
 
-	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	Command autonomousCommand;
+	SendableChooser<Command> chooser = new SendableChooser<>();
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final Climber climber = new Climber();
 	public static final Elevator elevator = new Elevator();
@@ -48,9 +45,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		m_oi = new OI();
+		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", m_chooser);
+		SmartDashboard.putData("Auto mode", chooser);
 	}
 
 	/**
@@ -81,7 +78,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+		autonomousCommand = chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -91,8 +88,8 @@ public class Robot extends TimedRobot {
 		 */
 
 		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
+		if (autonomousCommand != null) {
+			autonomousCommand.start();
 		}
 	}
 
@@ -110,8 +107,8 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
+		if (autonomousCommand != null) {
+			autonomousCommand.cancel();
 		}
 	}
 
