@@ -33,7 +33,7 @@ public class Elevator extends Subsystem {
 		return status;
 	}
 	
-	public void startSimulataneousLiftProfile()
+	public void startAutomaticLiftProfile()
 	{
 		fillProfiles();
 		stageOne.processMotionProfileBuffer(); // just to make sure one goes through
@@ -44,13 +44,13 @@ public class Elevator extends Subsystem {
 		stageTwo.set(ControlMode.MotionProfile, 1);
 	}
 	
-	public void keepSimulatenousLift()
+	public void keepAutomaticLifting()
 	{
 		stageOne.set(ControlMode.MotionProfile, 1); // enable motion profile
 		stageTwo.set(ControlMode.MotionProfile, 1);
 	}
 	
-	public void stopSimulataneousLiftProfile()
+	public void stopAutomaticLiftProfile()
 	{
 		
 		stageOne.set(ControlMode.MotionProfile, 0); // disable motion profile

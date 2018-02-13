@@ -1,17 +1,14 @@
 package org.usfirst.frc.team4504.robot.commands;
 
 import org.usfirst.frc.team4504.robot.Robot;
-
-import com.ctre.phoenix.motion.TrajectoryPoint;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ClimberStop extends Command {
+public class StopClimb extends Command {
 
-    public ClimberStop() {
+    public StopClimb() {
         // Use requires() here to declare subsystem dependencies
          requires(Robot.climber);
     }
