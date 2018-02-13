@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4504.robot.subsystems;
 
 import org.usfirst.frc.team4504.robot.RobotMap;
-import org.usfirst.frc.team4504.robot.commands.ClimberStop;
+import org.usfirst.frc.team4504.robot.commands.StopClimb;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -21,7 +21,7 @@ public class Climber extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new ClimberStop());
+        setDefaultCommand(new StopClimb());
     }
     
     public void up() {
