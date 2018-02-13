@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ElevatorStageOne extends Command {
+public class RunElevator extends Command {
 
-    public ElevatorStageOne() {
+    public RunElevator() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.elevator);
@@ -26,7 +26,15 @@ public class ElevatorStageOne extends Command {
     	{
     		input *= -1;
     	}
-    	Robot.elevator.stageOne(input);
+    	
+    	if(Robot.oi.elevatorSt1.get())
+    	{
+	    	Robot.elevator.stageOne(input);
+    	}
+    	if(Robot.oi.elevatorSt2.get())
+    	{
+    		Robot.elevator.stageTwo(input);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

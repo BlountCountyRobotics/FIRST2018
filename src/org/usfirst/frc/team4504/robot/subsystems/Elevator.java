@@ -53,9 +53,13 @@ public class Elevator extends Subsystem {
 	
 	public void stopAutomaticLiftProfile()
 	{
-		
 		stageOne.set(ControlMode.MotionProfile, 0); // disable motion profile
 		stageTwo.set(ControlMode.MotionProfile, 0);
+		
+		pointProcessingNotifier.stop();
+		
+		stageOne.clearMotionProfileTrajectories();
+		stageTwo.clearMotionProfileTrajectories();		
 	}
 	
 	public void stageOne(double percent)
