@@ -8,6 +8,7 @@
 package org.usfirst.frc.team4504.robot;
 
 import org.usfirst.frc.team4504.robot.commands.ClimberUp;
+import org.usfirst.frc.team4504.robot.commands.OpenGrabber;
 import org.usfirst.frc.team4504.robot.objects.ButtonBoard;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -50,6 +51,7 @@ public class OI {
 		changeShooterSpeed = buttonBoard.getTopSwitch();
 		
 		climb.whileHeld(new ClimberUp());
+		controlGrabber.whileHeld(new OpenGrabber());
 	}
 	
 
