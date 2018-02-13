@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ConstantElevator extends Command {
+public class ConstantElevatorSt1 extends Command {
 
-    public ConstantElevator() {
+    public ConstantElevatorSt1() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
