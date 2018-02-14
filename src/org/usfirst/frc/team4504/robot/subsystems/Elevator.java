@@ -29,6 +29,7 @@ public class Elevator extends Subsystem {
 	Notifier pointProcessingNotifier = new Notifier(new PeriodicRunnable());
 	DigitalInput topLimitSwitch = new DigitalInput(0);
 	DigitalInput bottomLimitSwitch = new DigitalInput(1);
+	public boolean automaticLiftingStopped = false;
 
 	
 	public MotionProfileStatus getMotionProfileStatus()
@@ -44,6 +45,8 @@ public class Elevator extends Subsystem {
 		stageOne.processMotionProfileBuffer(); // just to make sure one goes through
 		stageTwo.processMotionProfileBuffer();
 		startProcessingPoints();
+		
+		automaticLiftingStopped = false;
 		
 		if(topLimitSwitch.get())
 		{
@@ -73,6 +76,8 @@ public class Elevator extends Subsystem {
 		stageTwo.set(ControlMode.MotionProfile, 0);
 		
 		pointProcessingNotifier.stop();
+		
+		automaticLiftingStopped = true;
 		
 		stageOne.clearMotionProfileTrajectories();
 		stageTwo.clearMotionProfileTrajectories();		

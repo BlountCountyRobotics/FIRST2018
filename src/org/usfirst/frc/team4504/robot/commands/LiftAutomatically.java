@@ -25,10 +25,14 @@ public class LiftAutomatically extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.elevator.getMotionProfileStatus().isLast
-    			|| Robot.elevator.getMotionProfileStatus().isUnderrun)
+    	if(Robot.elevator.getMotionProfileStatus().isLast)
     	{
     		isFinished = true;
+    	}
+    	if(Robot.elevator.automaticLiftingStopped)
+    	{
+    		isFinished = true;
+    		return;
     	}
     	Robot.elevator.keepAutomaticLifting();
     }
