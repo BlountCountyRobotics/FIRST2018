@@ -62,11 +62,11 @@ public class OI {
 		climb.whileHeld(new Climb());
 		deployClimber.whileHeld(new DeployClimber());
 		grab.whileHeld(new Grab());
-		letGo.whileHeld(new LetGo());
+		letGo.whileHeld(new OpenGrabber());
 		shoot.whileHeld(new Shoot());
 		intake.whileHeld(new Intake());
-		elevatorSt1.whileHeld(new ElevatorStageOne());
-		elevatorSt2.whileHeld(new ElevatorStageTwo());
+		elevatorSt1.whileHeld(new RunElevator());
+		elevatorSt2.whileHeld(new RunElevator());
 		autoElevator.whileHeld(new LiftAutomatically());
 	}
 	

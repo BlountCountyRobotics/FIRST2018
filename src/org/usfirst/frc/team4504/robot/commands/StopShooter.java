@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LetGo extends Command {
+public class StopShooter extends Command {
 
-    public LetGo() {
+    public StopShooter() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }

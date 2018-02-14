@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4504.robot.commands;
 
+import org.usfirst.frc.team4504.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,14 +12,17 @@ public class Grab extends Command {
     public Grab() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.grabber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.grabber.grab();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

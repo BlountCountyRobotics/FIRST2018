@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4504.robot.subsystems;
 
 import org.usfirst.frc.team4504.robot.RobotMap;
+import org.usfirst.frc.team4504.robot.commands.StopShooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -46,6 +47,7 @@ public class Shooter extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new StopShooter());
     }
     
     public Shooter()
