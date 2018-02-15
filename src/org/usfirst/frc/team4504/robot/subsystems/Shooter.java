@@ -43,7 +43,13 @@ public class Shooter extends Subsystem {
 		right.set(ControlMode.Velocity, 
 				RobotMap.Shooter.intakeRPM * RobotMap.Constants.rpmConversion);
 	}
-	
+
+	public void stop()
+	{
+		left.set(ControlMode.PercentOutput, 0.0);
+		right.set(ControlMode.PercentOutput, 0.0);
+	}
+
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
