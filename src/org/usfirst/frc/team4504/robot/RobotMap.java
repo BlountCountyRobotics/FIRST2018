@@ -84,14 +84,10 @@ public class RobotMap {
 	
 	public static class Grabber {
 		public static int motor = 0;
-		public static int vexMotorLeft = 1;
-		public static int vexMotorRight = 2;
 		
-		public static double grabRPM = 0.0;
-		public static double openRPM = 0.0;
-		public static double vexMotorLeftRPM = 0.0;
-		public static double vexMotorRightRPM = 0.0;
-		public static double currentThreshold = 0.0;
+		public static double grabPercent = .5;
+		
+		public static double dTime = .005;
 	}
 	
 	public static class MotionProfiles

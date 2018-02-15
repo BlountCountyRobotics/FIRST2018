@@ -6,6 +6,7 @@ import org.usfirst.frc.team4504.robot.objects.TalonBCR;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -16,8 +17,36 @@ public class Grabber extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	TalonBCR grabMotor = new TalonBCR(RobotMap.Grabber.motor);
-	TalonBCR vexMotorRight = new TalonBCR(RobotMap.Grabber.vexMotorRight);
-	TalonBCR vexMotorLeft = new TalonBCR(RobotMap.Grabber.vexMotorLeft);
+
+	private double pastCurrent;
+	private double currentCurrent;
+	private double dCurrent;
+	
+	Notifier currentThreadNotifier;
+	Runnable currentThread = new Runnable() {
+		@Override
+		public void run() {
+			updateCurrent();
+		}
+		
+	};
+	
+	private void updateCurrent() {
+		pastCurrent = currentCurrent;
+		currentCurrent = getCurrent();
+		dCurrent = currentCurrent-pastCurrent;
+	}
+	
+	public double dCurrentdTime()
+	{
+		return dCurrent/RobotMap.Grabber.dTime;
+	}
+	
+	public Grabber()
+	{
+		currentThreadNotifier = new Notifier(currentThread);
+		currentThreadNotifier.startPeriodic(RobotMap.Grabber.dTime); // get dCurrent every dTime
+	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -25,40 +54,23 @@ public class Grabber extends Subsystem {
     }
     
     public double getCurrent() {
-    		return grabMotor.getOutputCurrent();
+    	return grabMotor.getOutputCurrent();
     }
     
     public void grab() {
-    		double outputCurrent = grabMotor.getOutputCurrent(); 
-    	
-    		// TODO: make PID version of this
-    		if (outputCurrent <= RobotMap.Grabber.currentThreshold) {
-	    		grabMotor.set(ControlMode.PercentOutput, RobotMap.Grabber.grabRPM * RobotMap.Constants.rpmConversion);
-	    		
-	    		// until someone opens grabber, it will continue to run the vex motors
-	    		vexMotorRight.set(ControlMode.PercentOutput, RobotMap.Grabber.vexMotorRightRPM * RobotMap.Constants.rpmConversion);
-	    		vexMotorLeft.set(ControlMode.PercentOutput, RobotMap.Grabber.vexMotorLeftRPM * RobotMap.Constants.rpmConversion);
-    		}
+    	grabPercent(RobotMap.Grabber.grabPercent);
     }
     
     public void grabPercent(double percent) {
-		grabMotor.set(ControlMode.PercentOutput, percent * RobotMap.Grabber.grabRPM * RobotMap.Constants.rpmConversion);
-		
-		// until someone opens grabber, it will continue to run the vex motors
-		vexMotorRight.set(ControlMode.PercentOutput, percent * RobotMap.Grabber.vexMotorRightRPM * RobotMap.Constants.rpmConversion);
-		vexMotorLeft.set(ControlMode.PercentOutput, percent * RobotMap.Grabber.vexMotorLeftRPM * RobotMap.Constants.rpmConversion);
+		grabMotor.set(ControlMode.PercentOutput, percent);
     }
     
     public void stop() {
-    		grabMotor.set(ControlMode.PercentOutput, 0.0);
+    	grabMotor.set(ControlMode.PercentOutput, 0.0);
     }
     
     public void open() {
-    		grabMotor.set(ControlMode.PercentOutput, RobotMap.Grabber.openRPM * RobotMap.Constants.rpmConversion);
-    		
-    		// stop vex motors
-    		vexMotorRight.set(ControlMode.PercentOutput, 0.0);
-    		vexMotorLeft.set(ControlMode.PercentOutput, 0.0);
+    	grabPercent(-RobotMap.Grabber.grabPercent); // grab but in opposite direction
     }
 }
 
