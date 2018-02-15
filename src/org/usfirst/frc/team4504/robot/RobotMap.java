@@ -59,7 +59,7 @@ public class RobotMap {
 	public static class Constants
 	{
 		public static double talonUnitsPerRev = 4096.0;
-		public static double rpmConversion = talonUnitsPerRev * 600.0; // 600.0 = 100ms/min
+		public static double rpmConversion = talonUnitsPerRev / 600.0; // 600.0 = 100ms/min
 		public static int timeout = 0;
 	}
 	
