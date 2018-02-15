@@ -37,7 +37,7 @@ public class Grabber extends Subsystem {
 		dCurrent = currentCurrent-pastCurrent;
 	}
 	
-	public double dCurrentdTime()
+	public double getCurrentDerivative()
 	{
 		return dCurrent/RobotMap.Grabber.dTime;
 	}
