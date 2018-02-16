@@ -45,8 +45,8 @@ public class Shooter extends Subsystem {
 	}
 	
 	public void stop() {
-		left.set(ControlMode.Percent, 0.0);
-		right.set(ControlMode.Percent, 0.0);
+		left.set(ControlMode.PercentOutput, 0.0);
+		right.set(ControlMode.PercentOutput, 0.0);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
