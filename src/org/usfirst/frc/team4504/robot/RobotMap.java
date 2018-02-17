@@ -26,6 +26,8 @@ public class RobotMap {
 		
 		// Motor info for Drivetrain
 		public static final double maxRPM = 1500;
+		public static final int distanceError = 10; // error allowed for the distance in native units
+		public static final int distanceMinSpeed = 50;
 	} 
 	
 	public static class ButtonBoard

@@ -57,6 +57,9 @@ public class DriveTrain extends Subsystem {
 	{
 		leftRPM *= RobotMap.Constants.rpmConversion;
 		rightRPM *= RobotMap.Constants.rpmConversion;
+
+		leftFront.selectProfileSlot(RobotMap.DriveTrain.VelocityPIDSlot, 0);
+		rightFront.selectProfileSlot(RobotMap.DriveTrain.VelocityPIDSlot, 0);
 		
 		leftBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftFront);
 		leftFront.set(ControlMode.Velocity, leftRPM);
@@ -70,6 +73,10 @@ public class DriveTrain extends Subsystem {
 	{
 		double position = convertInchesToPosition(inches);
 		
+		leftFront.selectProfileSlot(RobotMap.DriveTrain.DistancePIDSlot, 0);
+		rightFront.selectProfileSlot(RobotMap.DriveTrain.DistancePIDSlot, 0);
+
+		
 		leftBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftFront);
 		leftFront.set(ControlMode.Position, position);
 		
@@ -77,10 +84,40 @@ public class DriveTrain extends Subsystem {
 		rightFront.set(ControlMode.Position, position);
 	}
 	
+	public void resetPosition()
+	{
+		int leftAbsolutePosition = leftFront.getSensorCollection().getPulseWidthPosition();
+		leftFront.setSelectedSensorPosition(leftAbsolutePosition, RobotMap.DriveTrain.DistancePIDSlot, RobotMap.Constants.timeout);
+		int rightAbsolutePosition = rightFront.getSensorCollection().getPulseWidthPosition();
+		rightFront.setSelectedSensorPosition(rightAbsolutePosition, RobotMap.DriveTrain.DistancePIDSlot, RobotMap.Constants.timeout);
+	}
+	
 	public double convertInchesToPosition(double inches)
 	{
 		double rotations = inches / (6.0 * Math.PI); // inches to rotations of the wheel
 		return rotations * 4096.0; // rotations of the wheel to native units of the talon (see documentation)
+	}
+	
+	public boolean hasDrivenToPosition(double inches)
+	{
+		double position = convertInchesToPosition(inches);
+
+		boolean isLeftDone =  leftFront.getClosedLoopError(0) < position + RobotMap.DriveTrain.distanceError 
+				&& leftFront.getClosedLoopError(0) > position - RobotMap.DriveTrain.distanceError;
+				
+		boolean isRightDone = rightFront.getClosedLoopError(0) < position + RobotMap.DriveTrain.distanceError 
+				&& rightFront.getClosedLoopError(0) > position - RobotMap.DriveTrain.distanceError;
+				
+		boolean isRobotStillMoving = leftFront.getSelectedSensorVelocity(0) > RobotMap.DriveTrain.distanceMinSpeed
+				&& rightFront.getSelectedSensorVelocity(0) > RobotMap.DriveTrain.distanceMinSpeed;
+			
+		/*
+		 * The robot has reached its position once
+		 * both sides have reached within bounds of
+		 * their position and the robot is no longer
+		 * moving significantly to maintain it.
+		 */
+		return isLeftDone && isRightDone && !isRobotStillMoving; 
 	}
 	
 	public DriveTrain()
