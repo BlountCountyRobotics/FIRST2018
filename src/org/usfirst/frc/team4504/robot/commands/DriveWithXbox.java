@@ -3,7 +3,6 @@ package org.usfirst.frc.team4504.robot.commands;
 import org.usfirst.frc.team4504.robot.Robot;
 import org.usfirst.frc.team4504.robot.objects.BCRXboxController;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
