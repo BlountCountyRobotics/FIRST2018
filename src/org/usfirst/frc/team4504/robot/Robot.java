@@ -12,10 +12,9 @@ import org.usfirst.frc.team4504.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4504.robot.subsystems.Elevator;
 import org.usfirst.frc.team4504.robot.subsystems.Grabber;
 import org.usfirst.frc.team4504.robot.subsystems.Shooter;
-import org.usfirst.frc.team4504.robot.subsystems.pid.GyroAngle;
+import org.usfirst.frc.team4504.robot.subsystems.pid.PIDTurning;
 
 import com.kauailabs.navx.frc.AHRS;
-import com.kauailabs.navx.frc.AHRS.SerialDataType;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -41,9 +40,8 @@ public class Robot extends TimedRobot {
 	public static final Elevator elevator = new Elevator();
 	public static final Grabber grabber = new Grabber();
 	public static final Shooter shooter = new Shooter();
-	public static final GyroAngle gyroAngle = new GyroAngle();
 	
-	AHRS ahrs;
+	public static AHRS ahrs;
 
 
 	/**
