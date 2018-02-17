@@ -7,6 +7,9 @@
 
 package org.usfirst.frc.team4504.robot;
 
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SPI.Port;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -21,6 +24,8 @@ public class RobotMap {
 		public static int rightFront = 2;
 		public static int leftBack = 3;
 		public static int rightBack = 4;
+		
+		public static Port gyroPort = SPI.Port.kOnboardCS0;
 		
 		// Motor info for Drivetrain
 		public static double maxRPM = 1500;

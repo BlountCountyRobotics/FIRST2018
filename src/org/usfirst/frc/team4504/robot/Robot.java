@@ -12,7 +12,7 @@ import org.usfirst.frc.team4504.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4504.robot.subsystems.Elevator;
 import org.usfirst.frc.team4504.robot.subsystems.Grabber;
 import org.usfirst.frc.team4504.robot.subsystems.Shooter;
-
+import org.usfirst.frc.team4504.robot.subsystems.pid.GyroAngle;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -37,6 +37,7 @@ public class Robot extends TimedRobot {
 	public static final Elevator elevator = new Elevator();
 	public static final Grabber grabber = new Grabber();
 	public static final Shooter shooter = new Shooter();
+	public static final GyroAngle gyroAngle = new GyroAngle();
 
 
 	/**
