@@ -3,8 +3,9 @@ package org.usfirst.frc.team4504.robot.objects;
 import org.usfirst.frc.team4504.robot.RobotMap;
 
 import com.ctre.phoenix.motion.TrajectoryPoint;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-public class TalonBCR extends com.ctre.phoenix.motorcontrol.can.TalonSRX {
+public class TalonBCR extends TalonSRX {
 
 	public TalonBCR(int deviceNumber) {
 		super(deviceNumber);
