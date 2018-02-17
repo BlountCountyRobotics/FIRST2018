@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4504.robot.subsystems;
 
 import org.usfirst.frc.team4504.robot.RobotMap;
+import org.usfirst.frc.team4504.robot.objects.BCRGyro;
 import org.usfirst.frc.team4504.robot.objects.BCRXboxController;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
