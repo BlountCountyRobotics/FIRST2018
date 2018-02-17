@@ -20,79 +20,83 @@ public class RobotMap {
 
 	public static class DriveTrain
 	{
-		public static int leftFront = 1;
-		public static int rightFront = 2;
-		public static int leftBack = 3;
-		public static int rightBack = 4;
+		public static final int DistancePIDSlot = 1;
+		public static final int VelocityPIDSlot = 0;
+		public static final int leftFront = 1;
+		public static final int rightFront = 2;
+		public static final int leftBack = 3;
+		public static final int rightBack = 4;
 		
 		public static Port gyroPort = SPI.Port.kOnboardCS0;
 		
 		// Motor info for Drivetrain
-		public static double maxRPM = 1500;
+		public static final double maxRPM = 1500;
+		public static final int distanceError = 10; // error allowed for the distance in native units
+		public static final int distanceMinSpeed = 50;
 	} 
 	
 	public static class ButtonBoard
 	{
-		public static int bottomLeft = 0;
-		public static int bottomMiddle = 1;
-		public static int bottomRight = 2;
-		public static int topLeft = 3;
-		public static int topMiddle = 4;
-		public static int topRight = 5;
+		public static final int bottomLeft = 0;
+		public static final int bottomMiddle = 1;
+		public static final int bottomRight = 2;
+		public static final int topLeft = 3;
+		public static final int topMiddle = 4;
+		public static final int topRight = 5;
 		
-		public static int leftDial = 0;
-		public static int rightDial = 1;
+		public static final int leftDial = 0;
+		public static final int rightDial = 1;
 		
-		public static int topSwitch = 6;
-		public static int bottomSwitch = 7;
+		public static final int topSwitch = 6;
+		public static final int bottomSwitch = 7;
 	}
 	
 	public static class Elevator
 	{
-		public static int stageOne = 5;
-		public static int stageTwo = 6;
+		public static final int stageOne = 5;
+		public static final int stageTwo = 6;
 		
-		public static double maxRPMStageOne = 1500.0;
-		public static double maxRPMStageTwo = 1500.0;
+		public static final double maxRPMStageOne = 1500.0;
+		public static final double maxRPMStageTwo = 1500.0;
 		
-		public static int stageOneAcceleration = 0;
-		public static int stageOneVelocity = 0;
-		public static int stageTwoAcceleration = 0;
-		public static int stageTwoVelocity = 0;
+		public static final int stageOneAcceleration = 0;
+		public static final int stageOneVelocity = 0;
+		public static final int stageTwoAcceleration = 0;
+		public static final int stageTwoVelocity = 0;
 	}
 	
 	public static class Constants
 	{
-		public static double talonUnitsPerRev = 4096.0;
-		public static double rpmConversion = talonUnitsPerRev / 600.0; // 600.0 = 100ms/min
-		public static int timeout = 0;
+		public static final double talonUnitsPerRev = 4096.0;
+		public static final double rpmConversion = talonUnitsPerRev / 600.0; // 600.0 = 100ms/min
+		public static final int timeout = 0;
 	}
 	
 	public static class Shooter
 	{
-		public static int left = 7;
-		public static int right = 8;
+		public static final int left = 7;
+		public static final int right = 8;
 		
-		public static double shootingRPM = 1300;
-		public static double intakeRPM = 200;
-		public static double maxRPM = 1600;
+		public static final double shootingRPM = 1300;
+		public static final double intakeRPM = 200;
+		public static final double maxRPM = 1600;
 	}
 	
 	public static class Climber {
-		public static int tapeMeasure = 0;
-		public static int cimMotor = 0;
+		public static final int tapeMeasure = 0;
+		public static final int cimMotor = 0;
 		
-		public static double tapeMeasureDown = 0;
-		public static double tapeMeasureUp = 0;
-		public static double cimDown = 0;
+		public static final double tapeMeasureDown = 0;
+		public static final double tapeMeasureUp = 0;
+		public static final double cimDown = 0;
 	}
 	
 	public static class Grabber {
-		public static int motor = 0;
+		public static final int motor = 0;
 		
-		public static double grabPercent = .5;
+		public static final double grabPercent = .5;
 		
-		public static double dTime = .005;
+		public static final double dTime = .005;
 	}
 	
 	public static class MotionProfiles

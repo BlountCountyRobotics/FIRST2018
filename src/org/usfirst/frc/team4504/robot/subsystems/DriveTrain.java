@@ -39,13 +39,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void percentVoltageDrive(double left, double right)
-	{
-		if(!inputsAreValid(left, right))
-		{
-			left = 0.0;
-			right = 0.0;
-		}
-		
+	{	
 		
 		leftFront.set(ControlMode.PercentOutput, left);
 		leftBack.set(ControlMode.PercentOutput, left);
@@ -56,13 +50,6 @@ public class DriveTrain extends Subsystem {
 	
 	public void percentRPMDrive(double left, double right)
 	{
-		setEncodersRelative();
-		if(!inputsAreValid(left, right))
-		{
-			left = 0.0;
-			right = 0.0;
-		}
-		
 		double leftRPM = left * RobotMap.DriveTrain.maxRPM;
 		double rightRPM = right * RobotMap.DriveTrain.maxRPM;
 		
@@ -71,9 +58,11 @@ public class DriveTrain extends Subsystem {
 	
 	public void rpmDrive(double leftRPM, double rightRPM)
 	{
-		setEncodersRelative();
 		leftRPM *= RobotMap.Constants.rpmConversion;
 		rightRPM *= RobotMap.Constants.rpmConversion;
+
+		leftFront.selectProfileSlot(RobotMap.DriveTrain.VelocityPIDSlot, 0);
+		rightFront.selectProfileSlot(RobotMap.DriveTrain.VelocityPIDSlot, 0);
 		
 		leftBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftFront);
 		leftFront.set(ControlMode.Velocity, leftRPM);
@@ -82,11 +71,14 @@ public class DriveTrain extends Subsystem {
 		rightFront.set(ControlMode.Velocity, rightRPM);
 	}
 	
-	public void setMotorPosition(double position)
+	
+	public void driveDistance(double inches)
 	{
-		setEncodersAbsolute();
+		double position = convertInchesToPosition(inches);
 		
-		position *= RobotMap.Constants.rpmConversion;
+		leftFront.selectProfileSlot(RobotMap.DriveTrain.DistancePIDSlot, 0);
+		rightFront.selectProfileSlot(RobotMap.DriveTrain.DistancePIDSlot, 0);
+
 		
 		leftBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftFront);
 		leftFront.set(ControlMode.Position, position);
@@ -95,15 +87,40 @@ public class DriveTrain extends Subsystem {
 		rightFront.set(ControlMode.Position, position);
 	}
 	
-	private boolean inputsAreValid(double left, double right)
+	public void resetPosition()
 	{
-		boolean violates = left > 1.0 || left < -1.0 || right > 1.0 || right < -1.0;
-		
-		if(violates)
-		{
-			System.err.println("* * * ERR: Attempted to send out of range output to motors. * * *");
-		}
-		return !violates;
+		int leftAbsolutePosition = leftFront.getSensorCollection().getPulseWidthPosition();
+		leftFront.setSelectedSensorPosition(leftAbsolutePosition, RobotMap.DriveTrain.DistancePIDSlot, RobotMap.Constants.timeout);
+		int rightAbsolutePosition = rightFront.getSensorCollection().getPulseWidthPosition();
+		rightFront.setSelectedSensorPosition(rightAbsolutePosition, RobotMap.DriveTrain.DistancePIDSlot, RobotMap.Constants.timeout);
+	}
+	
+	public double convertInchesToPosition(double inches)
+	{
+		double rotations = inches / (6.0 * Math.PI); // inches to rotations of the wheel
+		return rotations * 4096.0; // rotations of the wheel to native units of the talon (see documentation)
+	}
+	
+	public boolean hasDrivenToPosition(double inches)
+	{
+		double position = convertInchesToPosition(inches);
+
+		boolean isLeftDone =  leftFront.getClosedLoopError(0) < position + RobotMap.DriveTrain.distanceError 
+				&& leftFront.getClosedLoopError(0) > position - RobotMap.DriveTrain.distanceError;
+				
+		boolean isRightDone = rightFront.getClosedLoopError(0) < position + RobotMap.DriveTrain.distanceError 
+				&& rightFront.getClosedLoopError(0) > position - RobotMap.DriveTrain.distanceError;
+				
+		boolean isRobotStillMoving = leftFront.getSelectedSensorVelocity(0) > RobotMap.DriveTrain.distanceMinSpeed
+				&& rightFront.getSelectedSensorVelocity(0) > RobotMap.DriveTrain.distanceMinSpeed;
+			
+		/*
+		 * The robot has reached its position once
+		 * both sides have reached within bounds of
+		 * their position and the robot is no longer
+		 * moving significantly to maintain it.
+		 */
+		return isLeftDone && isRightDone && !isRobotStillMoving; 
 	}
 	
 	public DriveTrain()
@@ -112,23 +129,11 @@ public class DriveTrain extends Subsystem {
 		rightFront = new TalonSRX(RobotMap.DriveTrain.rightFront);
 		leftBack = new TalonSRX(RobotMap.DriveTrain.leftBack);
 		rightBack = new TalonSRX(RobotMap.DriveTrain.rightBack);
-	
-		setEncodersRelative();
-	}
-	
-	
-	// * TODO: check if relative/absolute even makes a difference (I don't think so)
-	private void setEncodersRelative()
-	{
+
 		leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.Constants.timeout);
 		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.Constants.timeout);
 	}
 	
-	private void setEncodersAbsolute()
-	{
-		leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, RobotMap.Constants.timeout);
-		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, RobotMap.Constants.timeout);
-	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
