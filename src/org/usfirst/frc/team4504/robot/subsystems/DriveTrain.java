@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4504.robot.subsystems;
 
 import org.usfirst.frc.team4504.robot.RobotMap;
-import org.usfirst.frc.team4504.robot.objects.BCRGyro;
 import org.usfirst.frc.team4504.robot.objects.BCRXboxController;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -54,6 +53,30 @@ public class DriveTrain extends Subsystem {
 		rpmDrive(leftRPM, rightRPM);
 	}
 	
+	public void percentRPMDriveLeft(double left)
+	{
+		double leftRPM = left * RobotMap.DriveTrain.maxRPM;
+		leftRPM *= RobotMap.Constants.rpmConversion;
+		
+		leftFront.selectProfileSlot(RobotMap.DriveTrain.VelocityPIDSlot, 0);
+
+		
+		leftBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftFront);
+		leftFront.set(ControlMode.Velocity, leftRPM);
+	}
+	
+	public void percentRPMDriveRight(double right)
+	{
+		double rightRPM = right * RobotMap.DriveTrain.maxRPM;
+		rightRPM *= RobotMap.Constants.rpmConversion;
+		
+		rightFront.selectProfileSlot(RobotMap.DriveTrain.VelocityPIDSlot, 0);
+
+		
+		rightBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftFront);
+		rightFront.set(ControlMode.Velocity, rightRPM);
+	}
+	
 	public void rpmDrive(double leftRPM, double rightRPM)
 	{
 		leftRPM *= RobotMap.Constants.rpmConversion;
@@ -70,55 +93,21 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	
-	public void driveDistance(double inches)
+	public TalonSRX getLeftFrontTalon()
 	{
-		double position = convertInchesToPosition(inches);
-		
-		leftFront.selectProfileSlot(RobotMap.DriveTrain.DistancePIDSlot, 0);
-		rightFront.selectProfileSlot(RobotMap.DriveTrain.DistancePIDSlot, 0);
-
-		
-		leftBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftFront);
-		leftFront.set(ControlMode.Position, position);
-		
-		rightBack.set(ControlMode.Follower, RobotMap.DriveTrain.leftBack);
-		rightFront.set(ControlMode.Position, position);
+		return leftFront;
 	}
-	
-	public void resetPosition()
+	public TalonSRX getRightFrontTalon()
 	{
-		int leftAbsolutePosition = leftFront.getSensorCollection().getPulseWidthPosition();
-		leftFront.setSelectedSensorPosition(leftAbsolutePosition, RobotMap.DriveTrain.DistancePIDSlot, RobotMap.Constants.timeout);
-		int rightAbsolutePosition = rightFront.getSensorCollection().getPulseWidthPosition();
-		rightFront.setSelectedSensorPosition(rightAbsolutePosition, RobotMap.DriveTrain.DistancePIDSlot, RobotMap.Constants.timeout);
+		return rightFront;
 	}
-	
-	public double convertInchesToPosition(double inches)
+	public TalonSRX getLeftBackTalon()
 	{
-		double rotations = inches / (6.0 * Math.PI); // inches to rotations of the wheel
-		return rotations * 4096.0; // rotations of the wheel to native units of the talon (see documentation)
+		return leftBack; 
 	}
-	
-	public boolean hasDrivenToPosition(double inches)
+	public TalonSRX getRightBackTalon()
 	{
-		double position = convertInchesToPosition(inches);
-
-		boolean isLeftDone =  leftFront.getClosedLoopError(0) < position + RobotMap.DriveTrain.distanceError 
-				&& leftFront.getClosedLoopError(0) > position - RobotMap.DriveTrain.distanceError;
-				
-		boolean isRightDone = rightFront.getClosedLoopError(0) < position + RobotMap.DriveTrain.distanceError 
-				&& rightFront.getClosedLoopError(0) > position - RobotMap.DriveTrain.distanceError;
-				
-		boolean isRobotStillMoving = leftFront.getSelectedSensorVelocity(0) > RobotMap.DriveTrain.distanceMinSpeed
-				&& rightFront.getSelectedSensorVelocity(0) > RobotMap.DriveTrain.distanceMinSpeed;
-			
-		/*
-		 * The robot has reached its position once
-		 * both sides have reached within bounds of
-		 * their position and the robot is no longer
-		 * moving significantly to maintain it.
-		 */
-		return isLeftDone && isRightDone && !isRobotStillMoving; 
+		return rightBack;
 	}
 	
 	public DriveTrain()

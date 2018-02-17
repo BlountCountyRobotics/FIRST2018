@@ -31,8 +31,27 @@ public class RobotMap {
 		
 		// Motor info for Drivetrain
 		public static final double maxRPM = 1500;
+		
+		public static final double inchToPosition = 4096.0 / (6.0 * Math.PI); 
+		// inches / circumference of wheel = rotations, rotations * native encoder units per rotation = position
+		
 		public static final int distanceError = 10; // error allowed for the distance in native units
 		public static final int distanceMinSpeed = 50;
+		
+		public static final int angleError = 5;
+		
+		public static final double angleKp = .1;
+		public static final double angleKi = .1;
+		public static final double angleKd = .1;
+		
+		public static final double leftKp = .1;
+		public static final double leftKi = .1;
+		public static final double leftKd = .1;		
+		
+		public static final double rightKp = .1;
+		public static final double rightKi = .1;
+		public static final double rightKd = .1;
+
 	} 
 	
 	public static class ButtonBoard
