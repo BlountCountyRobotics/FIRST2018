@@ -14,6 +14,10 @@ import org.usfirst.frc.team4504.robot.subsystems.Grabber;
 import org.usfirst.frc.team4504.robot.subsystems.Shooter;
 import org.usfirst.frc.team4504.robot.subsystems.pid.GyroAngle;
 
+import com.kauailabs.navx.frc.AHRS;
+import com.kauailabs.navx.frc.AHRS.SerialDataType;
+
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -38,6 +42,8 @@ public class Robot extends TimedRobot {
 	public static final Grabber grabber = new Grabber();
 	public static final Shooter shooter = new Shooter();
 	public static final GyroAngle gyroAngle = new GyroAngle();
+	
+	AHRS ahrs;
 
 
 	/**
@@ -47,6 +53,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		ahrs = new AHRS(SerialPort.Port.kMXP);
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
