@@ -23,13 +23,13 @@ public class DriveTrain extends Subsystem {
 	TalonSRX rightFront;
 	TalonSRX rightBack;
 	
-	public void xboxToVoltage(BCRXboxController controller)
+	public void driveWithXboxVoltage(BCRXboxController controller)
 	{
 		percentVoltageDrive(controller.getY(Hand.kLeft), 
 				controller.getY(Hand.kRight));
 	}
 	
-	public void xboxToRPM(BCRXboxController controller)
+	public void driveWithXboxRPM(BCRXboxController controller)
 	{
 		percentVoltageDrive(controller.getY(Hand.kLeft), 
 				controller.getY(Hand.kRight));
