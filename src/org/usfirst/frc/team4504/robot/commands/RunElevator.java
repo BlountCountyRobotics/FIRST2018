@@ -29,11 +29,11 @@ public class RunElevator extends Command {
     	
     	if(Robot.oi.elevatorSt1.get())
     	{
-	    	Robot.elevator.stageOne(input);
+	    	Robot.elevator.setStageOne(input);
     	}
     	if(Robot.oi.elevatorSt2.get())
     	{
-    		Robot.elevator.stageTwo(input);
+    		Robot.elevator.setStageTwo(input);
     	}
     }
 

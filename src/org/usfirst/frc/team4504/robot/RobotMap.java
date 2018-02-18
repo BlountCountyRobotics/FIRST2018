@@ -77,14 +77,6 @@ public class RobotMap {
 	{
 		public static final int stageOne = 5;
 		public static final int stageTwo = 6;
-		
-		public static final double maxRPMStageOne = 1500.0;
-		public static final double maxRPMStageTwo = 1500.0;
-		
-		public static final int stageOneAcceleration = 0;
-		public static final int stageOneVelocity = 0;
-		public static final int stageTwoAcceleration = 0;
-		public static final int stageTwoVelocity = 0;
 	}
 	
 	public static class Constants
