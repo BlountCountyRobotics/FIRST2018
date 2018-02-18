@@ -45,7 +45,7 @@ public class DriveDistance extends Command implements PIDOutput {
 
 		@Override
 		public double pidGet() {
-			return talon.getSelectedSensorPosition(0);
+			return talon.getSensorCollection().getQuadraturePosition();
 		}
 		
 	}
@@ -62,12 +62,18 @@ public class DriveDistance extends Command implements PIDOutput {
 		@Override
 		public void pidWrite(double output) {
 			boolean isLeft = false;
-			if(talon.getBaseID() == RobotMap.DriveTrain.leftFront)
+			boolean isRight = false;
+			if(talon.equals(Robot.driveTrain.getLeftFrontTalon()))
 			{
 				isLeft = true;
 			}
+			if(talon.equals(Robot.driveTrain.getRightFrontTalon()))
+			{
+				isRight = true;
+			}
 			
-			if(angleCorrection > 0 && !isLeft)
+			
+			if(angleCorrection > 0 && isRight)
 			{
 				output += angleCorrection;
 			}else if(angleCorrection < 0 && isLeft)
@@ -78,7 +84,7 @@ public class DriveDistance extends Command implements PIDOutput {
 			if(isLeft)
 			{
 				Robot.driveTrain.percentRPMDriveLeft(output);
-			}else
+			}else if(isRight)
 			{
 				Robot.driveTrain.percentRPMDriveRight(output);
 			}
@@ -98,6 +104,9 @@ public class DriveDistance extends Command implements PIDOutput {
     			new TalonEncoderSource(Robot.driveTrain.getLeftFrontTalon()), new TalonOutput(Robot.driveTrain.getLeftFrontTalon()));
     	rightController = new PIDController(RobotMap.DriveTrain.rightKp, RobotMap.DriveTrain.rightKi, RobotMap.DriveTrain.rightKd, 
     			new TalonEncoderSource(Robot.driveTrain.getRightFrontTalon()), new TalonOutput(Robot.driveTrain.getRightFrontTalon()));
+    	leftController.setAbsoluteTolerance(RobotMap.DriveTrain.distanceError);
+    	rightController.setAbsoluteTolerance(RobotMap.DriveTrain.distanceError);
+    	angleController.setContinuous();
     }
 
     // Called just before this Command runs the first time
@@ -126,41 +135,19 @@ public class DriveDistance extends Command implements PIDOutput {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-		boolean isLeftDone =  getLeftClosedLoopError() < position + RobotMap.DriveTrain.distanceError 
-				&& getLeftClosedLoopError() > position - RobotMap.DriveTrain.distanceError;
-				
-		boolean isRightDone = getRightClosedLoopError() < position + RobotMap.DriveTrain.distanceError 
-				&& getRightClosedLoopError() > position - RobotMap.DriveTrain.distanceError;
-		
-		boolean isTurningDone = getAngleClosedLoopError() < Robot.ahrs.getYaw() + RobotMap.DriveTrain.angleError 
-				&& getAngleClosedLoopError() > Robot.ahrs.getYaw() - RobotMap.DriveTrain.angleError;
-		
 		boolean isRobotStillMoving = Robot.driveTrain.getLeftFrontTalon().getSelectedSensorVelocity(0) > RobotMap.DriveTrain.distanceMinSpeed
 				&& Robot.driveTrain.getRightFrontTalon().getSelectedSensorVelocity(0) > RobotMap.DriveTrain.distanceMinSpeed;
 			
 		/*
 		 * The robot has reached its position once
 		 * both sides have reached within bounds of
-		 * their position, it has stopped turning,
-		 * and the robot has stopped movement
+		 * their position and the robot has stopped 
+		 * movement.
 		 */
-		return isLeftDone &&  isTurningDone && isRightDone && !isRobotStillMoving;
+				
+		return leftController.onTarget() && rightController.onTarget() && !isRobotStillMoving;
     }
     
-    private double getLeftClosedLoopError()
-    {
-    	return leftController.getSetpoint() - Robot.driveTrain.getLeftFrontTalon().getSelectedSensorPosition(0);
-    }
-    
-    private double getRightClosedLoopError()
-    {
-    	return rightController.getSetpoint() - Robot.driveTrain.getRightFrontTalon().getSelectedSensorPosition(0);
-    }
-    
-    private double getAngleClosedLoopError()
-    {
-    	return angleController.getSetpoint() - Robot.ahrs.getYaw();
-    }
     // Called once after isFinished returns true
     protected void end() {
     	leftController.disable();
