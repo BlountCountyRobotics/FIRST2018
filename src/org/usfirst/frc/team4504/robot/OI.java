@@ -32,7 +32,6 @@ public class OI {
 	public JoystickButton intake; // button; hold; on xbox
 	public JoystickButton elevatorSt1; // button; hold
 	public JoystickButton elevatorSt2; // button; hold
-	public JoystickButton autoElevator;
 	
 	public JoystickButton changeElevatorDirection; // switch
 	// this changes the direction of the elevator
@@ -54,7 +53,6 @@ public class OI {
 		intake = controller.getAJoystickButton();
 		elevatorSt1 = buttonBoard.getTopMiddle();
 		elevatorSt2 = buttonBoard.getTopRight();
-		autoElevator = buttonBoard.getTopRight();
 		
 		changeShooterSpeed = buttonBoard.getTopSwitch();
 		changeElevatorDirection = buttonBoard.getBottomSwitch();
@@ -67,7 +65,6 @@ public class OI {
 		intake.whileHeld(new Intake());
 		elevatorSt1.whileHeld(new RunElevator());
 		elevatorSt2.whileHeld(new RunElevator());
-		autoElevator.whileHeld(new LiftAutomatically());
 	}
 	
 
