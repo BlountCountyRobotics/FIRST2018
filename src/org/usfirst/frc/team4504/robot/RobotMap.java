@@ -77,6 +77,9 @@ public class RobotMap {
 	{
 		public static final int stageOne = 5;
 		public static final int stageTwo = 6;
+		
+		public static final double stageOneOutput = .5;
+		public static final double stageTwoOutput = 1.0;
 	}
 	
 	public static class Constants

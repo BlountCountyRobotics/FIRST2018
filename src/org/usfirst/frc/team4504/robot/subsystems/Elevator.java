@@ -39,6 +39,16 @@ public class Elevator extends Subsystem {
 		stageTwo.set(ControlMode.PercentOutput, output);
 	}
 	
+	public void runStageOne()
+	{
+		setStageOne(RobotMap.Elevator.stageOneOutput);
+	}
+	
+	public void runStageTwo()
+	{
+		setStageTwo(RobotMap.Elevator.stageTwoOutput);
+	}
+	
 	public Elevator()
 	{
 		// create motors
