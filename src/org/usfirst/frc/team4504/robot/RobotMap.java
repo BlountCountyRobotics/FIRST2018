@@ -38,7 +38,7 @@ public class RobotMap {
 		public static final int distanceError = 10; // error allowed for the distance in native units
 		public static final int distanceMinSpeed = 50;
 		
-		public static final int angleError = 5;
+		public static final int turnError = 3;
 		
 		public static final double angleKp = .1;
 		public static final double angleKi = .1;
@@ -51,7 +51,10 @@ public class RobotMap {
 		public static final double rightKp = .1;
 		public static final double rightKi = .1;
 		public static final double rightKd = .1;
-
+		
+		public static final double turnKp = .1;
+		public static final double turnKi = .1;
+		public static final double turnKd = .1;
 	} 
 	
 	public static class ButtonBoard
