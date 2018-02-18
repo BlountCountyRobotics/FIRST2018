@@ -24,8 +24,6 @@ public class Shoot extends Command {
     	if(Robot.oi.changeShooterSpeed.get())
     	{
     		double input = Robot.oi.getButtonBoard().getLeftDialOutput();
-    		input -= .5;
-    		input *= 2; // go from (0.0, 1.0) to (-1.0, 1.0)
     		Robot.shooter.shoot(input);
     	}else
     	{
