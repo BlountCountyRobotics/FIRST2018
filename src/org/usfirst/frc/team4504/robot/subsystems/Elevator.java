@@ -31,6 +31,8 @@ public class Elevator extends Subsystem {
 
 	public void setStageOne(double output)
 	{
+		if(conflictsWithLimitSwitch(output))
+			output = 0.0;
 		stageOne.set(ControlMode.PercentOutput, output);
 	}
 	
@@ -47,6 +49,17 @@ public class Elevator extends Subsystem {
 	public void runStageTwo()
 	{
 		setStageTwo(RobotMap.Elevator.stageTwoOutput);
+	}
+	
+	private boolean conflictsWithLimitSwitch(double output)
+	{
+		if((output > 0.0 && topLimitSwitch.get()) 
+				|| (output < 0.0 && bottomLimitSwitch.get()))
+		{
+			return true;
+		}
+
+		return false;
 	}
 	
 	public Elevator()
