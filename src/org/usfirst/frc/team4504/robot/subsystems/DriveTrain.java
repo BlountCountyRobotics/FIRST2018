@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4504.robot.subsystems;
 
 import org.usfirst.frc.team4504.robot.RobotMap;
+import org.usfirst.frc.team4504.robot.commands.DriveWithXbox;
 import org.usfirst.frc.team4504.robot.objects.BCRXboxController;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -31,6 +32,10 @@ public class DriveTrain extends Subsystem {
 	
 	public void driveWithXboxRPM(BCRXboxController controller)
 	{
+		double left = controller.getY(Hand.kLeft);
+		double right = controller.getY(Hand.kRight);
+		
+		
 		percentVoltageDrive(controller.getY(Hand.kLeft), 
 				controller.getY(Hand.kRight));
 	}
@@ -92,6 +97,10 @@ public class DriveTrain extends Subsystem {
 		rightFront.set(ControlMode.Velocity, rightRPM);
 	}
 	
+	public void stop()
+	{
+		percentVoltageDrive(0.0, 0.0);
+	}
 	
 	public TalonSRX getLeftFrontTalon()
 	{
@@ -125,6 +134,7 @@ public class DriveTrain extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new DriveWithXbox());
     }
 }
 

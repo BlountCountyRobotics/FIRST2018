@@ -24,14 +24,15 @@ public class OI {
 	private ButtonBoard buttonBoard;
 	
 	// Buttons
-	public JoystickButton grab; // button; press; on xbox
-	public JoystickButton letGo; // button; press; on xbox
+	public JoystickButton grab; // button; tap; on xbox
+	public JoystickButton letGo; // button; hold; on xbox
 	public JoystickButton deployClimber; // button; hold
 	public JoystickButton climb; // button; hold
 	public JoystickButton shoot; // button; hold
 	public JoystickButton intake; // button; hold; on xbox
 	public JoystickButton elevatorSt1; // button; hold
 	public JoystickButton elevatorSt2; // button; hold
+	public JoystickButton stopDriving; // button; toggle; on xbox
 	
 	public JoystickButton changeElevatorDirection; // switch
 	// this changes the direction of the elevator
@@ -53,6 +54,7 @@ public class OI {
 		intake = controller.getAJoystickButton();
 		elevatorSt1 = buttonBoard.getTopMiddle();
 		elevatorSt2 = buttonBoard.getTopRight();
+		stopDriving = controller.getBackJoystickButton();
 		
 		changeShooterSpeed = buttonBoard.getTopSwitch();
 		changeElevatorDirection = buttonBoard.getBottomSwitch();
@@ -65,6 +67,7 @@ public class OI {
 		intake.whileHeld(new Intake());
 		elevatorSt1.whileHeld(new RunElevator());
 		elevatorSt2.whileHeld(new RunElevator());
+		stopDriving.toggleWhenPressed(new StopDriving());
 	}
 	
 
