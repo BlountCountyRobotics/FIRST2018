@@ -43,6 +43,11 @@ public class ButtonBoard extends Joystick {
 		return new JoystickButton(this, RobotMap.ButtonBoard.topSwitch);
 	}
 	
+	public JoystickButton getMiddleSwitch()
+	{
+		return new JoystickButton(this, RobotMap.ButtonBoard.middleSwitch);
+	}
+	
 	public JoystickButton getBottomSwitch()
 	{
 		return new JoystickButton(this, RobotMap.ButtonBoard.bottomSwitch);

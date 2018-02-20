@@ -70,12 +70,14 @@ public class RobotMap {
 		public static final int rightDial = 1;
 		
 		public static final int topSwitch = 6;
-		public static final int bottomSwitch = 7;
+		public static final int middleSwitch = 7;
+		public static final int bottomSwitch = 8;
 	}
 	
 	public static class Elevator
 	{
-		public static final int stageOne = 5;
+		public static final int stageOneOne = 5;
+		public static final int stageOneTwo = 5;
 		public static final int stageTwo = 6;
 		
 		public static final double stageOneOutput = .5;

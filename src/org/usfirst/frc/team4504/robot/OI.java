@@ -37,6 +37,10 @@ public class OI {
 	public JoystickButton changeElevatorDirection; // switch
 	// this changes the direction of the elevator
 	// from U/D when the buttons for it are pressed
+	public JoystickButton doubleElevatorMotors; // switch
+	// this forces the elevator mechanism to use two
+	// motors just in case that it is necessary, but
+	// normally only one due to power constraints
 	public JoystickButton changeShooterSpeed; // switch
 	// this makes one of the dials control the shooter speed
 	// instead of a set speed

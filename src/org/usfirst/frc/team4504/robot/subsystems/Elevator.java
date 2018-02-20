@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4504.robot.subsystems;
 
+import org.usfirst.frc.team4504.robot.Robot;
 import org.usfirst.frc.team4504.robot.RobotMap;
 import org.usfirst.frc.team4504.robot.commands.StopElevator;
 import org.usfirst.frc.team4504.robot.objects.TalonBCR;
@@ -24,7 +25,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Elevator extends Subsystem {
 
 	
-	TalonBCR stageOne;
+	TalonBCR stageOneOne;
+	TalonBCR stageOneTwo;
 	TalonBCR stageTwo;
 	DigitalInput topLimitSwitch = new DigitalInput(0);
 	DigitalInput bottomLimitSwitch = new DigitalInput(1);
@@ -33,7 +35,9 @@ public class Elevator extends Subsystem {
 	{
 		if(conflictsWithLimitSwitch(output))
 			output = 0.0;
-		stageOne.set(ControlMode.PercentOutput, output);
+		stageOneOne.set(ControlMode.PercentOutput, output);
+		if(Robot.oi.doubleElevatorMotors.get())
+			stageOneTwo.set(ControlMode.PercentOutput, output);
 	}
 	
 	public void setStageTwo(double output)
@@ -65,7 +69,8 @@ public class Elevator extends Subsystem {
 	public Elevator()
 	{
 		// create motors
-		stageOne = new TalonBCR(RobotMap.Elevator.stageOne);
+		stageOneOne = new TalonBCR(RobotMap.Elevator.stageOneOne);
+		stageOneTwo = new TalonBCR(RobotMap.Elevator.stageOneTwo);
 		stageTwo = new TalonBCR(RobotMap.Elevator.stageTwo);
 	}
 
